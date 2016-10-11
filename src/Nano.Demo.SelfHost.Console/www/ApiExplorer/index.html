@@ -627,10 +627,6 @@ body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:14px;line
         return getId(rowData) + 'SubmitButton';
     };
 
-    function getRawModeButtonId(rowData) {
-        return getId(rowData) + 'RawModeButton';
-    };
-
     function getClearButtonId(rowData) {
         return getId(rowData) + 'ClearButton';
     };
@@ -724,10 +720,6 @@ body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:14px;line
             clearSuccessAndFailureResults(rowData);
             var resultsId = getResultsId(rowData);
             $('#' + resultsId).hide();
-        });
-
-        $('.btn-rawMode').click(function () {
-            $(formInputs).toggle();
         });
 
         $(".inputParameter").on("keydown", function (e) {
@@ -853,7 +845,6 @@ body{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:14px;line
             '           <tbody></tbody>',
             '       </table>',
             '       <div style="padding-left:50px; margin-top:10px;">',
-            '           <button type="button" id="{{RawModeButtonId}}" class="btn btn-rawMode">Use Raw Mode</button>',
             '           <button type="submit" id="{{SubmitButtonId}}" class="btn btn-submit">Submit</button>',
             '           &nbsp;&nbsp;',
             '           <button type="button" id="{{ClearButtonId}}" class="btn btn-clear">Clear</button>',
