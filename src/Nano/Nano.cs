@@ -1868,6 +1868,12 @@ namespace Nano.Web.Core
 
         /// <summary>Parameter type.</summary>
         public Type Type;
+
+        /// <summary>Indicates whether the parameter has a default value.</summary>
+        public bool HasDefaultValue;
+
+        /// <summary>Default value.</summary>
+        public object DefaultValue;
     }
 
     /// <summary>Routes requests.</summary>
@@ -3255,7 +3261,7 @@ namespace Nano.Web.Core
                         if( methodParameter.Name.ToLower() == "nanocontext" || methodParameter.Type == typeof( NanoContext ) )
                             continue;
 
-                        var inputParameter = new OperationParameter { Name = methodParameter.Name, Description = methodParameter.Description, Type = GetTypeName( methodParameter.Type ), IsOptional = methodParameter.IsOptional };
+                        var inputParameter = new OperationParameter { Name = methodParameter.Name, Description = methodParameter.Description, Type = GetTypeName( methodParameter.Type ), IsOptional = methodParameter.IsOptional, HasDefaultValue = methodParameter.HasDefaultValue, DefaultValue = methodParameter.DefaultValue };
 
                         metadata.InputParameters.Add( inputParameter );
 
@@ -3546,7 +3552,7 @@ namespace Nano.Web.Core
 
                 foreach( ParameterInfo parameterInfo in methodInfo.GetParameters().OrderBy( x => x.Position ) )
                 {
-                    var methodParameter = new MethodParameter { Position = parameterInfo.Position, Name = parameterInfo.Name, Type = parameterInfo.ParameterType, IsOptional = parameterInfo.IsOptional, IsDynamic = IsDynamic( parameterInfo ), Description = xmlMethodDocumentation.GetParameterDescription( parameterInfo.Name ) };
+                    var methodParameter = new MethodParameter { Position = parameterInfo.Position, Name = parameterInfo.Name, Type = parameterInfo.ParameterType, IsOptional = parameterInfo.IsOptional, IsDynamic = IsDynamic( parameterInfo ), Description = xmlMethodDocumentation.GetParameterDescription( parameterInfo.Name ), HasDefaultValue = parameterInfo.HasDefaultValue, DefaultValue = parameterInfo.DefaultValue };
                     methodParameters.Add( methodParameter );
                 }
 
@@ -3849,6 +3855,12 @@ namespace Nano.Web.Core
 
             /// <summary>Parameter type.</summary>
             public string Type;
+
+            /// <summary>Indicates whether the parameter has a default value.</summary>
+            public bool HasDefaultValue;
+
+            /// <summary>Default value.</summary>
+            public object DefaultValue;
         }
     }
 
